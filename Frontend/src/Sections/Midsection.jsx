@@ -8,11 +8,12 @@ const {title,para,img,link,leftImage} = data.data
       <>
     <div className={`header-container flex ${leftImage?`xl:flex-row-reverse`:`xl:flex-row`} ${leftImage?`flex-col-reverse`:`flex-col-reverse`} w-screen  py-[52px] px-[70px]`}>
     <div className={`w-[100%] xl:mt-0 -mt-4 -ml-10 xl:w-[50%] px-0 xl:px-[70px] ${leftImage?`xl:ml-0`:`xl:ml-[100px]`}`}>
-        <div className="text-[30px] leading-[30px] xl:text-[64px] xl:leading-[64px] mt-[100px] font-serif font-medium text-black">{title}</div>
+            <h3 className='mt-[100px] uppercase text-md text-theme-200'>Language</h3>
+        <div className="text-[30px] leading-[30px] mt-2 xl:text-[64px] xl:leading-[64px]  font-serif font-medium text-black">{title}</div>
 <div className="w-[80vw] xl:w-[500px] ml-4 mt-4 text-[15px] text-[#505050]">{para}
 </div>
 <div className="w-[80vw] flex flex-row items-center justify-between pt-6">
-    <button className='xl:py-[15px] ml-2 xl:px-[48px] px-[40px] py-[10px]  rounded-md bg-theme-200 text-white'><a href={`${link}`}>Buy Now</a></button>
+    <button className='xl:py-[15px] ml-2 xl:px-[48px] px-[40px] py-[10px]  rounded-md bg-theme-200 text-white'><a href={`${link}`}>Explore</a></button>
 </div>
     </div>
     <div className="xl:w-[40%] xl:mb-0 -mb-10">

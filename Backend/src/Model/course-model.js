@@ -17,6 +17,11 @@ const coursesSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+  duration: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
   content: {
     type: String, // Array of content sections
     required: true,
@@ -37,7 +42,7 @@ const coursesSchema = new mongoose.Schema({
   },
   enrolledStudents: {
     type: mongoose.Schema.Types.ObjectId,
-    ref : 'user' // Reference to the User schema
+    ref : 'user' 
   }
 
 });

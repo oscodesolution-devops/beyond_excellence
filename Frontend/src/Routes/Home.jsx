@@ -10,6 +10,9 @@ import Midsection from '../Sections/Midsection'
 import Testimonial from '../Sections/Testimonial'
 import Subscrive from '../Sections/Subscrive'
 import Footer from '../Sections/Footer'
+import Cardbox from '../Sections/Cardbox'
+import About from '../Sections/About'
+import Language from '../Sections/Language'
   const data = [
     {
     title: "Master the elegance of french",
@@ -39,10 +42,13 @@ const Home = () => {
     <>
     <Navbar/>
     <Header/>
+    <About/>
     <Promotion/>
     <Midsection data={data[0]}/>
     <Midsection data={data[1]}/>
     <Midsection data={data[2]}/>
+    <Cardbox/>
+    <Language/>
     <Testimonial/>
     <Subscrive/>
     <Footer/>

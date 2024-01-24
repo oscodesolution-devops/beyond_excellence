@@ -1,31 +1,34 @@
 import { useState , useEffect } from 'react'
-import {useSelector} from "react-redux"
+import {useSelector } from "react-redux"
+import { useDispatch  } from 'react-redux';
 import './App.css'
 
 import Router from './Routes/Router';
   import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+  import { setToken , setSession , cleanSession  } from './Store/slice/userToken';
   import axios from "axios"
 function App() {
+  const dispatch = useDispatch();
    const token = useSelector((state) => state.auth.token);console.log("ttokenn",token);
-
 // YourComponent.js
 const [data,setData] = useState({})
   const getUser = async() => {
     try {
       const res = await axios.get("http://localhost:4000/login/success",{withCredentials:true},)
       setData(res.data.user);
-      console.log("res",res);
-      console.log("data",data);
-  
+      console.log("20=>",res.data.user);
+      dispatch(setToken(res.data.token));   
+
     } catch (error) {
-      console.log("Error: "+ error);
-      
+        console.log("Error: "+ error);     
     }
-  }
-  useEffect(() => {
+}
+Object?.keys(data)?.length > 0 ? dispatch(setSession()):dispatch(cleanSession());
+
+useEffect(() => {
     getUser();
-  }, [])
+  },[])
   return (
  <>
 

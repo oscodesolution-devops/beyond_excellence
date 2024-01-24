@@ -3,20 +3,30 @@ const mongoose = require('mongoose');
 const purchaseSchema = new mongoose.Schema({
   courseId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'course-model', // Reference to the Course schema
-    required: true,
+    ref: 'course', // Reference to the Course schema
   },
   studentId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user-model', // Reference to the Course schema
-    required: true,
+    ref: 'user', // Reference to the Course schema
   },
   purchaseDate: {
     type: Date,
-    required: true,
+    default:Date.now()
   },
   expiryDate: {
     type: Date,
+    
+  },
+  orderId:{
+    type : String ,
+    required: true,
+  },
+   paymentId:{
+    type : String ,
+    required: true,
+  },
+   razorpaySignature:{
+    type : String ,
     required: true,
   },
 });

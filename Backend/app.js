@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session')
 const connectDb = require('./src/Database/dbConfig')
 const authGoogle = require('./src/Router/auth')
 const session = require('express-session')
+const paymentController = require("./src/Controller/paymentController")
 //Swagger 
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
@@ -16,6 +17,9 @@ const passportSetup = require('./src/Services/Passport');
 const oAuth = require('passport-google-oauth20').Strategy
 const User = require('./src/Model/user-model')
 const app = express();
+const router = express.Router();
+const jwt = require('jsonwebtoken')
+const authMiddleware = require('./src/Middleware/authMiddleware')
 const corsOption = {
     origin:process.env.FRONTEND_PATH,
     method:'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -46,22 +50,19 @@ passport.use(
     },
     
     async(accessToken,refreshToken,profile,done)=>{
-        console.log("==>");
-          console.log("Check By Chiku",profile);
-          console.log("==>");
         try {
-
             let userExict = await User.findOne({email:profile.emails[0].value});
-            if(!userExict){
-                userExict = new User({
-                    name:profile.displayName,
-                    last:"kumar",
+            console.log("56",userExict);
+            if(!userExict ){
+                console.log("mai aa gya hu 58",profile.phoneNumbers);
+                const newUser = new User({
+                    name:profile.name.givenName,
+                    last:profile.name.familyName,
                     email:profile.emails[0].value || "",
                     password:profile.id,
-                    number:"7485964152"
-                });
-                await userExict.save();
-
+                    number: profile.phoneNumbers ? profile.phoneNumbers[0].value : "",                })
+      const savedUser = await newUser.save();
+  
         } return done(null,userExict )}
         catch (error) {
             return done(error,null)
@@ -79,14 +80,21 @@ passport.deserializeUser((user,done)=>{
 app.get("/auth/google",passport.authenticate("google",{scope:["profile","email"]}))
 app.get("/auth/google/callback" ,passport.authenticate("google",{
     failureRedirect:"http://localhost:5173/login",
-    successRedirect:"http://localhost:5173/profile"
+    successRedirect:"http://localhost:5173"
 }))
 
-app.get('/login/success',(req,res) => {
+app.get('/login/success',async (req,res) => {
     if(req.user){
+        const token = jwt.sign(
+        { _id : req.user._id.toString() , 
+        email : req.user.email,
+        },
+        process.env.JWT_SECRET,{expiresIn:'1d'});
+        console.log("Token =========>\n",token)
         res.status(201).json({
         message:"Successfully Logged In",
-        user:req.user
+        user:req.user,
+        token:token
     })
     }else{
     res.status(403).json({
@@ -104,6 +112,14 @@ app.get('/logout',(req,res,next)=>{
     );
 
 })
+
+
+// app.router("/order").get(paymentController.order)
+// app.router("/verify").get(paymentController.verify)
+ app.post("/order" , paymentController.order)
+ app.post("/verify/:courseId" ,authMiddleware, paymentController.verify)
+
+
 app.use('/api/auth',require('./src/Router/auth-router'));
 app.use('/admin',require('./src/Router/admin-router'));
 app.use(errorMiddleware)

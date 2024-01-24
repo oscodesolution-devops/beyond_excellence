@@ -12,8 +12,10 @@ import Navbar from "../Components/Navbar";
 import { Link } from "react-router-dom";
 const Login = () => {
     const dispatch = useDispatch();
-const navigate = useNavigate();
+    const navigate = useNavigate();
     const [email,setEmail] = useState("");
+      const isLogin = localStorage.getItem("token");
+
     const [password,setPassword] = useState("");
     const form = {
       email:email,
@@ -39,13 +41,10 @@ const navigate = useNavigate();
           console.log(error);
         }
         toast.dismiss(toastId);
-
-
    }
    const googleAuth = async () => {
     window.open(`http://localhost:4000/auth/google/callback`,"_self")
   }
-
   return (
     <>
     <Navbar/>
@@ -90,7 +89,7 @@ const navigate = useNavigate();
   </div>
 </section>
     </>
-  )
+  ) 
 }
 
 export default Login
