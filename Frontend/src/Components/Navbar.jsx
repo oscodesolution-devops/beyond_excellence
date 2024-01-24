@@ -33,7 +33,7 @@ const Navbar = () => {
                   <span className="text-theme-200 -mr-5">Beyond Excellence</span>
         </div>
             <div
-                className={`${isOpen ? `hidden`:`absolute`} xl:block  nav-links duration-500 md:static xl:z-0 z-[99999]  bg-white  md:min-h-fit xl:h-auto xl:w-auto min-h-[90vh] w-[70vw] gap-3 items-start pl-10 pt-6 xl:pl-0 xl:pt-0 xl:right-0 xl:top-0 xl:flex-row -right-[30vw] top-[6vh]  flex-col  md:w-auto  flex xl:items-center xl:px-5`}>
+                className={`${isOpen ? `hidden`:`absolute`} xl:block md:block  nav-links duration-500 md:static xl:z-0 z-[99999]  bg-white  md:min-h-fit xl:h-auto xl:w-auto min-h-[90vh] w-[70vw] gap-3 items-start pl-10 pt-6 xl:pl-0 xl:pt-0 xl:right-0 xl:top-0 xl:flex-row -right-[30vw] top-[6vh]  flex-col  md:w-auto  flex xl:items-center xl:px-5`}>
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 ">
                     <li>
                         <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="#"><Link to="/">Home</Link></a>
@@ -48,12 +48,12 @@ const Navbar = () => {
                         <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="#"><Link to="/courses">Testimonials</Link></a>
                     </li>
                 </ul>
-                <div className={`${isOpen?`hidden`:`block`} xl:hidden flex items-center xl:gap-6 mt-6 gap-4`}>
+                <div className={`${isOpen?`hidden`:`block`} xl:hidden md:hidden flex items-center xl:gap-6 mt-6 gap-4`}>
                 <IoSearch size={"20px"}/>
                 {isLogin  > 0 || isLogin !== null ? <Link to={'/profile'}><FaRegUser size={"20px"}/></Link> : <Link to={'/login'}><FiUserPlus size={"20px"}/></Link>}
             </div>
             </div>
-            <div className={`xl:flex hidden items-center xl:gap-6 gap-2`}>
+            <div className={`xl:flex md:flex hidden items-center xl:gap-6 gap-2`}>
                 <IoSearch size={"20px"}/>
                 { isLogin ? <Link to={'/profile'}><FaRegUser size={"20px"}/></Link> : <Link to={'/login'}><FiUserPlus size={"20px"}/></Link>}
             </div>

@@ -4,7 +4,7 @@ const Promotion = () => {
   return (
     <>
         <div className="header-container flex flex-row w-screen mt-16 xl:mt-0  px-[20px] xl:px-[140px] ">
-            <div className="border-2 py-[50px] px-[109px] border-[1px solid rgba(46, 154, 42, 0.20);] rounded-lg -mt-8 w-[100%] flex flex-col gap-16 xl:gap-0 xl:flex-row items-center justify-evenly">
+            <div className="border-2 py-[50px] px-[109px] border-[1px solid rgba(46, 154, 42, 0.20);] rounded-lg -mt-8 w-[100%] flex flex-col gap-16 md:flex-row xl:gap-0 xl:flex-row items-center justify-evenly">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="50" height="38" viewBox="0 0 50 38" fill="none">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M33.2367 11.4558L29.7567 4.41857H30.7166V0.75H24.9235V4.41857H25.8822L24.5515 7.10638L23.222 4.4172H24.1807V0.75H18.3876V4.4172H19.3474L15.8675 11.4558H14.625V15.123H20.5334V11.4558H19.4718L21.2853 7.78865L21.9874 9.21096H21.3135V12.8795H27.7906V9.21096H27.1168L27.8189 7.78865L29.6324 11.4558H28.5707V15.123H34.478V11.4558H33.2367Z" fill="#862334"/>

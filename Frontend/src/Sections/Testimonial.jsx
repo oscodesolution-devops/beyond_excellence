@@ -19,13 +19,13 @@ const Testimonial = () => {
     },
     // when window width is >= 768px
     768: {
-      slidesPerView: 2,
+      slidesPerView: 1,
     },
   };
   return (
   <>
-  <div className="w-screen h-[100vh] px-[100px]  mb-0">
-    <div className='text-center text-[40px] xl:text-[64px] font-semibold'>Testimonials</div>
+  <div className="w-screen md:h-[60vh] xl:h-[100vh] px-[100px]  mb-0">
+    <div className='text-center md:mb-4 md:mt-4 mb-6 text-[40px] xl:text-[64px] font-semibold'>Testimonials</div>
       <Swiper
       breakpoints={breakpoints}
         slidesPerView={2}
@@ -40,10 +40,10 @@ const Testimonial = () => {
         modules={[Autoplay]}
         className="mySwiper"
       >
-        <SwiperSlide>
-            <div className="flex flex-col items-center">
+        <SwiperSlide className='border-2'>
+            <div className="flex flex-col items-center ">
             <img src={image} alt='/'/>
-            <div className="text-[40px]">Elizabeth Thomas</div>
+            <div className=" xl:text-[40px] md:text-[40px] text-[30px]">Elizabeth Thomas</div>
             <p className="text-[15px] text-[#1E1E1E] w-[50%]">Improve your grammar, vocabulary, and communication skills for professional success and academic pursuits..</p>
             </div>
         </SwiperSlide>

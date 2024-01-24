@@ -30,9 +30,9 @@ const Cardbox = () => {
     ]
   return (
     <>
-    <div className='w-screen h-[80vh]'>
-            <div className='text-center text-[64px] font-semibold'>Courses Offered</div>
-            <div className='grid grid-cols-3 gap-4 p-4 pt-10'>
+    <div className='w-screen xl:h-[80vh] md:h-auto'>
+            <div className='text-center xl:text-[64px] md:text-[64px] text-[40px] font-semibold'>Courses Offered</div>
+            <div className='grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 p-4 pt-10'>
                 <Card data={data[0]}/>
                 <Card data={data[1]}/>
                 <Card data={data[2]}/>
