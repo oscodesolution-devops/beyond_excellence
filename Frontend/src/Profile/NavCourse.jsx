@@ -5,10 +5,11 @@ const coursesDetails = data.data.map(item => {
   return courseDetail ? { courseId: item.courseId, ...courseDetail } : null;
 });
 const filterCourse = coursesDetails.filter(Boolean) ;
-console.log(filterCourse); 
+
   return (
     <>
- <div className="w-screen h-auto px-[80px] py-[40px]">
+   
+         <div className="w-screen h-auto px-[80px] py-[40px]">
         <p className=" text-black  sm:text-[40px] xl:text-[64px] text-left pb-[40px] " >Course</p>
         <div className="w-[100%] gap-y-[40px] xl:gap-y-[100px] m-0 p-0 gap-4 xl:gap-10 grid grid-flow-row sm:grid-cols-3 xl:grid-cols-4">
             {filterCourse.map(item => <>
@@ -18,7 +19,7 @@ console.log(filterCourse);
             <div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden">
                 <a className="block focus:outline-none focus-visible:ring-2" href="#0">
                     <figure className="relative h-0 pb-[56.25%] overflow-hidden">
-                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={`${item.images[0]}`} width="320" height="180" alt="Course" />
+                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={`${item.images}`} width="320" height="180" alt="Course" />
                     </figure>
                 </a>
                 <div className="flex-grow flex flex-col p-5">
@@ -45,7 +46,9 @@ console.log(filterCourse);
             </>)}
     
         </div>
-    </div>    </>
+    </div> 
+  
+    </>
   )
 }
 

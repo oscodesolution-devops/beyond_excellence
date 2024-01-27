@@ -6,11 +6,13 @@ import "./Profile.css"
 import { useNavigate } from "react-router-dom";
 import NavDashboard from '../Profile/NavDashboard';
 import NavCourse from '../Profile/NavCourse';
+import Account from '../Pages/Account';
 
 
 const Profile = () => {
     const navigate = useNavigate();
   const [userData,setUserData] = useState([])
+  const [userId,setUserId] = useState([])
   const [parchaseData,setParchaseData] = useState([])
   const [course,setCourse] = useState([])
   const [toggle,setToggle] = useState(false)
@@ -20,13 +22,12 @@ const Profile = () => {
         localStorage.removeItem("token");
         window.open(`http://localhost:4000/logout`,"_self")
   }
-  
 const userDatas = async () => {
 const token = localStorage.getItem("token");
     const response = await makeAuthenticatedGETRequest(token ,endPoint.GET_ALL_USER);
     setUserData(response.data.msg)
-    setAdmin(response.data.msg.isAdmin)
-
+    setAdmin(response?.data?.msg?.isAdmin)
+    setUserId(response?.data?.msg)
     const purchase = await makeAuthenticatedGETRequest(token ,endPoint.PURCHASES);
 
     setParchaseData(purchase.data)
@@ -37,6 +38,7 @@ const token = localStorage.getItem("token");
         
 }
 
+console.log("userId ==> \n",userId);
 
 const handler = (section) => {
     setNavlink(section);
@@ -52,14 +54,12 @@ const handler = (section) => {
        navigate('/admin')
     }
   }, [admin])
-  
   return (
     <>
 <div>
 <div className="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
     <div className="navbar show navbar-vertical h-lg-screen navbar-expand-lg px-0 py-3 navbar-light bg-white border-bottom border-bottom-lg-0 border-end-lg" id="navbarVertical">
-        <div className="container-fluid h-[100vh]">
-        
+        <div className="container-fluid ">
         <div>
             <ul className="navbar-nav">
               <div className="cursor-pointer text-[#fff]  font-sans font-semibold xl:text-[30px] text-[25px] px-4 py-1 flex flex-wrap items-center gap-6">
@@ -77,7 +77,7 @@ const handler = (section) => {
                         </a>
                     </li>
                     <li className="nav-item" onClick={()=>handler("course")}>
-                        <a className="nav-link" href="#">
+                        <a className="nav-link">
                             <i className="bi bi-bar-chart"></i> Course
                         </a>
                     </li>
@@ -100,7 +100,7 @@ const handler = (section) => {
                 </ul>
         </div>
         <div>
-            <Link to={"/account"} className="navbar-nav">
+            <Link  className="navbar-nav"  onClick={()=>handler("account")}>
                     <li className="nav-item">
                         <a className="nav-link">
                             <i className="bi bi-person-square"></i> Account
@@ -123,12 +123,14 @@ const handler = (section) => {
   
   {navLink === "course" && (   <NavCourse course ={course} data = {parchaseData}/>
 )}
+
+ {navLink === "account" && (  <Account user={userId}/> )}
 </div>
 </div>
 
 {/* Model */}
  <>
-<div className={`fixed z-10 overflow-y-auto top-0 w-full left-0 ${toggle ? `block`:`hidden`}`} id="modal">
+<div className={`fixed z-[999999] overflow-y-auto top-0 w-full left-0 ${toggle ? `block`:`hidden`}`} id="modal">
   <div className="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
     <div className="fixed inset-0 transition-opacity">
       <div className="absolute inset-0 bg-gray-900 opacity-75" />
@@ -154,4 +156,3 @@ const handler = (section) => {
 }
 
 export default Profile
-{/* <button onClick={logout}>Logout</button> */}

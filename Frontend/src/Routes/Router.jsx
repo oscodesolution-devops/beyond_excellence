@@ -9,7 +9,7 @@ import Course from "../Pages/Course"
 import CourseDetails from "../Pages/CourseDetails"
 import Account from "../Pages/Account"
 import Dashboard from "../Admin/Dashboard"
-import AboutUs from "../Pages/AboutUs"
+// import AboutUs from "../Pages/AboutUs"
 
 const Router = () => {
   const isLogin = localStorage.getItem("isLogin");

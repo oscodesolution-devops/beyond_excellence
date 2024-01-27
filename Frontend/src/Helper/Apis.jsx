@@ -4,5 +4,8 @@ export const  endPoint =  {
     LOGIC_API : BASE_URL + "/login",
     ALLCOURSE_API : BASE_URL + "/course",
     GET_ALL_USER : BASE_URL + "/user",
-    PURCHASES : BASE_URL + "/payment"
+    GET_ALL_USERS : BASE_URL + "/getuser",
+    PURCHASES : BASE_URL + "/payment",
+    ALL_PURCHASES : BASE_URL + "/purchase"
 }
+

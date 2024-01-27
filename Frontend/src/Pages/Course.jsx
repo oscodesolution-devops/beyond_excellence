@@ -35,15 +35,15 @@ Excellence</h1>
 
     <div className="w-screen h-auto px-[80px] py-[40px]">
         <p className=" text-black  sm:text-[40px] xl:text-[64px] text-left pb-[40px] " >Course</p>
-        <div className="w-[100%] gap-y-[40px] xl:gap-y-[100px] m-0 p-0 gap-4 xl:gap-10 grid grid-flow-row sm:grid-cols-3 xl:grid-cols-4">
+        <div className="w-[100%] gap-y-[40px] xl:gap-y-[100px] m-0 p-0 gap-4 xl:gap-10 grid grid-flow-row sm:grid-cols-2 grid-cols-1 xl:grid-cols-4">
             {data.map(item => <>
-               <section className="flex flex-col justify-center  antialiased bg-gray-50 text-gray-600  p-0">
+               <section className="flex xl:flex-col justify-center  antialiased bg-gray-50 text-gray-600  p-0">
     <div className="h-auto">
         <div className="max-w-xs mx-auto">
             <div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden">
                 <a className="block focus:outline-none focus-visible:ring-2" href="#0">
                     <figure className="relative h-0 pb-[56.25%] overflow-hidden">
-                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={`${item.images[0]}`} width="320" height="180" alt="Course" />
+                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={`${item.images}`} width="320" height="180" alt="Course" />
                     </figure>
                 </a>
                 <div className="flex-grow flex flex-col p-5">

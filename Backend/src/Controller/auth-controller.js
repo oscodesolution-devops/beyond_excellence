@@ -3,6 +3,7 @@ const Course = require('../Model/course-model')
 const Purchase = require('../Model/purchase-model')
 const bcrypt = require('bcryptjs')
 const { response } = require('express')
+const cloudinary = require("../Services/cloudinary")
 // Home Page 
 const Home = async (req,res) => {
     try {
@@ -100,27 +101,66 @@ const Admin = async (req,res) => {
 
 const CourseUpload = async (req,res) => {
     try {
-    const {title,description,images,price,content,enrolledStudents ,duration} = req.body;
-    const newCourse = await Course.create({title,description,images,price,content,enrolledStudents,duration})
+       
+    const {title,description,price,content ,duration} = req.body;
+
+    // const thumbnailLocalPath = req.files?.file[0]?.path ;
+    // console.log("==>");
+    //   console.log("Check By Chiku", req.files.file);
+    //   console.log("==>");
+    // if(!thumbnailLocalPath) {
+    //     console.log('No Thumbnail')
+    // }
+    // const thumbnail = await uploadOnCloudinary(thumbnailLocalPath)
+    // console.log("==>");
+    //   console.log("Check By Chiku 112", thumbnail.url);
+    //   console.log("==>");
+
+    // if(!thumbnail) {
+    //     console.log('No Thumbnail')
+    // }
+
+      const image = await cloudinary.uploader.upload(req.file.path, function (err , result){
+        if(err){
+            console.log(err);
+        }
+        // res.json(result.url)
+      });
+      console.log("130 \n \n",image.url);
+    // Respond with Cloudinary URL or other relevant data
+
+    const newCourse = await Course.create({title,description,images:image.url,price,content,duration})
     console.log('new course',newCourse)
-    res.status(201).json({msg:"Course added Successfull", res:newCourse});
+    res.status(201).json({msg:"Course added Successfull\n\n", res:newCourse});
     } catch (error) {
        console.log('Error in uploading course', error);
     }
 }
 
+const Getuser = async (req,res) => {
+try{
+    const user = await User.find();
+    return res.json({user})
+
+}catch(error){
+    next(error)
+}
+}
 
 const UserData = async (req,res) => {
     try {
         const userData = req.user;
-        console.log("==>");
-          console.log("Check By Chiku",userData);
-          console.log("==>");
         return res.status(201).json({msg:userData})
     } catch (error) {
         console.log("User Error : ", error);
         
     }
+}
+const Purchases = async (req,res) => { 
+    try { const user = await Purchase.find(); 
+        return res.json({user}) } 
+    catch (error)
+     { console.log("User Error : ", error); } 
 }
 
 const Payment = async (req,res) => {
@@ -137,5 +177,5 @@ const Payment = async (req,res) => {
     }
 }
 
-module.exports = {Home , Registration ,Login  ,Admin,CourseUpload,Getcourse,Findcourse ,UserData ,Payment}
+module.exports = {Home , Registration ,Login  ,Admin,CourseUpload,Getcourse,Findcourse ,UserData ,Payment,Purchases ,Getuser}
   

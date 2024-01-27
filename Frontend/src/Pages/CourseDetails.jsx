@@ -100,7 +100,7 @@ const loginPage = () => {
         <div className="text-[50px] leading-[55px] tracking-[0px] xl:text-[70px] xl:leading-[70px] mt-[80px] font-serif font-medium text-theme-200"> 
 {data.title}</div>
 <div className="w-[80vw] xl:w-[500px] ml-4 text-[16px] text-black"> Duration -<span className="w-[80vw] xl:w-[500px] ml-4 text-[15px] text-[#505050]">{data.duration} Years </span></div>
-<div className="w-[80vw] xl:w-[500px] ml-4 text-[15px] xl:my-4 text-[#505050]">{data.content} 
+<div className="w-[80vw] xl:w-[500px] ml-4 text-[15px] xl:my-4 text-[#505050]">{data.description} 
 </div>
 
 <div className="w-[80vw] xl:w-[500px] ml-4 text-[16px] text-black"> Price -<span className="w-[80vw] xl:w-[500px] ml-4 text-[15px] text-[#505050]">&#8377; {data.price}  </span></div>
@@ -111,13 +111,66 @@ const loginPage = () => {
 </div>
     </div>
     <div className=" w-[100%]">
-        <img className='w-[100%] h-[100%]' src={image} alt="" />
+        <img className='w-[100%] h-[100%]' src={data.images} alt="" />
     </div>
     </div>
 
+{/* =========================================================Details Start ============================================= */}
+    <div className="w-screen h-auto px-[120px] py-[20px] ">
+        <p className=" text-black  sm:text-[40px] xl:text-[50px] font-semibold text-center pb-[20px] " >Course Overview</p>
+        <p className="   sm:text-[40px] xl:text-[15px] text-[#505050] mb-12" >{data.content}
+            </p>
+        <p className=" text-theme-200  sm:text-[20px] xl:text-[20px] font-semibold text-left pb-[20px] " >Key Points</p>
+        <ul>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+        </ul>
+
+    </div>
+     <div className="w-screen h-auto px-[120px]  py-[20px] ">
+        <div></div>
+       <div>
+         <p className=" text-black  sm:text-[40px] xl:text-[50px] font-semibold text-center mb-4 " >Course Content</p>
+        <div className='border-2 p-4 rounded-sm border-gray-400'>
+        <p className="   sm:text-[40px] xl:text-[23px] text-black " >
+            Week 1 : Introduction to Web Development & Version Control
+        </p>
+        <p className=" text-black pl-6 sm:text-[20px] xl:text-[18px] font-bold text-left  " >Class 1: Introduction to HTML & CSS</p>
+        <ul className='pl-12'>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+        </ul>
+      
+
+         <div>
+        <p className="   sm:text-[40px] xl:text-[23px] text-black mt-4 " >
+            Week 1 : Introduction to Web Development & Version Control
+        </p>
+        <p className=" text-black pl-6 sm:text-[20px] xl:text-[18px] font-bold text-left  " >Class 1: Introduction to HTML & CSS</p>
+        <ul className='pl-12'>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+        </ul>
+        </div>
+ </div>
+ </div>
+    </div>
+
+
+{/* =========================================================Details End ============================================= */}
+
      <div className="w-screen h-auto px-[80px] py-[40px]">
         <p className=" text-black  sm:text-[40px] xl:text-[64px] text-left pb-[40px] " >Course</p>
-        <div className="w-[100%] gap-y-[40px] xl:gap-y-[100px] m-0 p-0 gap-4 xl:gap-10 grid grid-flow-row sm:grid-cols-3 xl:grid-cols-4">
+        <div className="w-[100%] gap-y-[40px] xl:gap-y-[100px] m-0 p-0 gap-4 xl:gap-10 grid grid-flow-row sm:grid-cols-3 grid-cols-1 xl:grid-cols-4">
             {course.slice(-4).map(item => <>
                <section className="flex flex-col justify-center  antialiased bg-gray-50 text-gray-600  p-0">
     <div className="h-auto">
@@ -125,7 +178,7 @@ const loginPage = () => {
             <div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden">
                 <a className="block focus:outline-none focus-visible:ring-2" href="#0">
                     <figure className="relative h-0 pb-[56.25%] overflow-hidden">
-                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={`${item.images[0]}`} width="320" height="180" alt="Course" />
+                        <img className="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src={`${item.images}`} width="320" height="180" alt="Course" />
                     </figure>
                 </a>
                 <div className="flex-grow flex flex-col p-5">

@@ -9,16 +9,18 @@ const coursesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  images: [{
+  images: {
     type: String, // Store image URLs
-  }],
+        required: true,
+
+  },
   price: {
-    type: Number,
+    type: String,
     required: true,
     min: 0,
   },
   duration: {
-    type: Number,
+    type: String,
     required: true,
     min: 0,
   },
@@ -34,6 +36,7 @@ const coursesSchema = new mongoose.Schema({
     type: Date,
     default:Date.now
   },
+  course:{type:Array},
   purchaseDate: {
     type: Date,
   },
