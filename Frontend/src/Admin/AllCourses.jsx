@@ -1,10 +1,15 @@
 import { useEffect ,useState } from 'react'
+import { FaTrash } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 
-import { makeUnauthenticatedGETRequest } from '../Helper/ServerHelper'
+import { makeAuthenticatedDELETERequest, makeUnauthenticatedGETRequest } from '../Helper/ServerHelper'
 import { endPoint } from '../Helper/Apis'
 import { Link } from 'react-router-dom'
 const AllCourses = () => {
+    const token = localStorage.getItem("token")
       const [data,setData] = useState([])
+
+      
 
     const getAllCourse = async () => {
         try {
@@ -16,11 +21,17 @@ const AllCourses = () => {
             console.log(error);       
         }
     }
+const deleteCourse = async (id) => {
+    alert(id)
+    // const route = `http://localhost:4000/admin//course/update/${id}`
+    // const response = await makeAuthenticatedDELETERequest(token, route)
+    // console.log("25",response);
 
+}
     useEffect(() => {
       getAllCourse();
     }, [])
-    
+    console.log(data);
   return (
     <>
      <div className="w-screen h-auto px-[80px] py-[40px]">
@@ -46,11 +57,24 @@ const AllCourses = () => {
                         <div className="mb-8">
                             <p>{item.description.split(/\s+/).slice(0, 7).join(" ")}...</p>
                         </div>
-                    </div>
-                    <div className="flex justify-between space-x-2">
+                        <div className="mb-8">
                         <a className="font-medium text-[15px] xl:text-[24px] inline-flex items-center justify-center px-3 py-1.5 rounded leading-5 text-black hover:underline focus:outline-none focus-visible:ring-2" href="#0">&#8377;{item.price}</a>
+                        </div>
+
+                    </div>
+                    <div className="flex justify-start space-x-2">
+
                         <a className="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-theme-200 focus:outline-none focus-visible:ring-2 hover:bg-indigo-600 text-white">
-                            <Link to={`/courses/${item._id}`} >Explore</Link></a>
+                        <MdEdit /> 
+                        </a>
+                        <a onClick={()=>deleteCourse(item._id)} className="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-theme-200 focus:outline-none focus-visible:ring-2 hover:bg-indigo-600 text-white">
+                        <FaTrash /> 
+                        </a>
+                        <a className="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-theme-200 focus:outline-none focus-visible:ring-2 hover:bg-indigo-600 text-white">
+                            <Link to={`/courses/${item._id}`} >Explore</Link>
+                        </a>
+                        </div>
+                        <div>
                     </div>
                 </div>
             </div>

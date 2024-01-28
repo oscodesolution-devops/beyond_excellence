@@ -28,6 +28,20 @@ const coursesSchema = new mongoose.Schema({
     type: String, // Array of content sections
     required: true,
   },
+  week:{
+    type:Array,
+    require:true,
+  },
+   classDetails:{
+    type:Array,
+  },
+   keypoint:{
+    type:Array,
+  },
+   classkey:{
+      type: Array,
+      
+   },
   createdAt: {
     type: Date,
     default: Date.now,

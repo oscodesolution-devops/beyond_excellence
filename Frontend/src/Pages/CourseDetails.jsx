@@ -91,8 +91,8 @@ const CourseDetails = () => {
 const loginPage = () => {
     navigate('/login');
 }
-    console.log(data);
-  return (
+console.log(data);
+ return (
     <>
     <Navbar/>
     <div className="header-container flex  w-screen flex-col-reverse gap-y-8 xl:gap-0  xl:py-[52px] xl:px-[70px] xl:flex-row-reverse">
@@ -121,12 +121,13 @@ const loginPage = () => {
         <p className="   sm:text-[40px] xl:text-[15px] text-[#505050] mb-12" >{data.content}
             </p>
         <p className=" text-theme-200  sm:text-[20px] xl:text-[20px] font-semibold text-left pb-[20px] " >Key Points</p>
-        <ul>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
+        <ul> 
+            {keypointArray.map((item,index)=>(
+            <li key={index} className='text-[15px] text-[#505050] list-disc'>{item}</li>
+
+            ))}
+            
+
         </ul>
 
     </div>
@@ -135,24 +136,14 @@ const loginPage = () => {
        <div>
          <p className=" text-black  sm:text-[40px] xl:text-[50px] font-semibold text-center mb-4 " >Course Content</p>
         <div className='border-2 p-4 rounded-sm border-gray-400'>
-        <p className="   sm:text-[40px] xl:text-[23px] text-black " >
-            Week 1 : Introduction to Web Development & Version Control
-        </p>
-        <p className=" text-black pl-6 sm:text-[20px] xl:text-[18px] font-bold text-left  " >Class 1: Introduction to HTML & CSS</p>
-        <ul className='pl-12'>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-        </ul>
-      
 
-         <div>
-        <p className="   sm:text-[40px] xl:text-[23px] text-black mt-4 " >
-            Week 1 : Introduction to Web Development & Version Control
+
+            {weekArray.map((item,index)=>(
+                <>
+             <p key={index} className="   sm:text-[40px] xl:text-[23px] text-black " >
+            Week {index+1} :{item}
         </p>
-        <p className=" text-black pl-6 sm:text-[20px] xl:text-[18px] font-bold text-left  " >Class 1: Introduction to HTML & CSS</p>
+        <p className=" text-black pl-6 sm:text-[20px] xl:text-[18px] font-bold text-left  " >{classDetails[index]}</p>
         <ul className='pl-12'>
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
@@ -160,6 +151,9 @@ const loginPage = () => {
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
         </ul>
+        </>
+            ))}
+         <div>
         </div>
  </div>
  </div>

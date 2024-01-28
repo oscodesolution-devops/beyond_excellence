@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import axios from "axios"
 import {toast} from "react-toastify"
+import { MdOutlineRemoveCircle } from "react-icons/md";
+import { IoIosAddCircle } from "react-icons/io";
 const course = () => {
 
   const token = localStorage.getItem("token")
@@ -11,7 +13,51 @@ const course = () => {
   const[content,setContent] = useState('')
   const[duration,setDuration] = useState('')
  
-  
+    const [inputFields, setInputFields] = useState([{ value: '' }]);
+    const [week, setWeek] = useState([{ value: '' }]);
+    const [classDetail, setClassDetail] = useState([{ value: '' }]);
+
+  const handleChange = (index, event , n) => {
+    if(n===1){
+    const values = [...inputFields];
+    values[index].value = event.target.value;
+    setInputFields(values);
+    }else if(n===2){
+    const values = [...week];
+    values[index].value = event.target.value;
+    setWeek(values);
+    }else if(n===3){
+    const values = [...classDetail];
+    values[index].value = event.target.value;
+    setClassDetail(values);
+    }
+  };
+
+  const handleAddField = (n) => {
+    if(n===1){
+    setInputFields([...inputFields, { value: '' }]);
+    }else if(n===2){
+        setWeek([...week,{value: ''}]);
+    }else if(n===3){
+        setClassDetail([...classDetail,{value: ''}]);
+    }
+  };
+
+  const handleRemoveField = (index , n) => {
+    if(n===1){
+    const values = [...inputFields];
+    values.splice(index, 1);
+    setInputFields(values);
+    }else if(n===2){
+    const values = [...week];
+    values.splice(index, 1);
+    setWeek(values);
+    }else if(n===3){
+    const values = [...classDetail];
+    values.splice(index, 1);
+    setClassDetail(values);
+    }
+  };
 
   const fileHandler = (e) => {
   setFile(e.target.files[0]);  }
@@ -26,6 +72,9 @@ const course = () => {
         formData.append('content', content);
         formData.append('duration', duration);
         formData.append('thumbnail', file);
+        inputFields.map((field) => formData.append('keypoint',field.value));
+        week.map((field) => formData.append('week',field.value));
+        classDetail.map((field) => formData.append('classDetails',field.value));
     try {
       
       const response = await axios.post("http://localhost:4000/admin/courseUpload", formData, {
@@ -40,7 +89,9 @@ const course = () => {
         toast.dismiss(toastId);
 
   }
-
+console.log(inputFields.map((field) => field.value));
+console.log(week.map((field) => field.value));
+console.log(classDetail.map((field) => field.value));
   return (
      <>
  <div className="w-full h-[100vh] overflow-y-scroll">
@@ -72,6 +123,66 @@ const course = () => {
            <label htmlFor="name" className="block mb-2 font-bold text-gray-600">Duration (Year)</label>
            <input onChange={(e)=>setDuration(e.target.value)} type="text" id="number" name="duration" placeholder="Put in your Course Duration." className="border border-gray-300 shadow p-3 w-full rounded mb-" />
          </div>
+
+           <label  className="block mb-2 font-bold text-gray-600">Key Highlights</label>
+          {inputFields.map((field, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              placeholder="Enter a value"
+              value={field.value}
+              className="border border-gray-300 shadow p-3 w-[80%] rounded mb-2 mr-2"
+              onChange={(e) => handleChange(index, e , 1)}
+            />
+            <button type="button" onClick={() => handleRemoveField(index , 1)}>
+              <MdOutlineRemoveCircle size={"35px"}/>
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={()=>handleAddField(1)}>
+          <IoIosAddCircle size={"35px"} color={'#CA2953'}/>
+        </button>
+
+         <label  className="block mb-2 font-bold text-gray-600">Week Details</label>
+          {week.map((field, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              placeholder="Enter a value"
+              value={field.value}
+              className="border border-gray-300 shadow p-3 w-[80%] rounded mb-2 mr-2"
+              onChange={(e) => handleChange(index, e , 2)}
+            />
+            <button type="button" onClick={() => handleRemoveField(index , 2)}>
+              <MdOutlineRemoveCircle size={"35px"}/>
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={()=>handleAddField(2)}>
+          <IoIosAddCircle size={"35px"} color={'#CA2953'}/>
+        </button>
+
+
+         <label  className="block mb-2 font-bold text-gray-600">Classes Details</label>
+          {classDetail.map((field, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              placeholder="Enter a value"
+              value={field.value}
+              className="border border-gray-300 shadow p-3 w-[80%] rounded mb-2 mr-2"
+              onChange={(e) => handleChange(index, e , 3)}
+            />
+            <button type="button" onClick={() => handleRemoveField(index , 3)}>
+              <MdOutlineRemoveCircle size={"35px"}/>
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={()=>handleAddField(3)}>
+          <IoIosAddCircle size={"35px"} color={'#CA2953'}/>
+        </button>
+
+
          <button className="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">Update</button>
        </form>
      </div>

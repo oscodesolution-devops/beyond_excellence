@@ -15,7 +15,7 @@ router.route('/getuser').get(authMiddleware ,AC.Getuser);
 router.route('/payment').get(authMiddleware,AC.Payment);
 router.route('/purchase').get(authMiddleware,AC.Purchases);
 router.route('/course').get(AC.Getcourse);
-router.route('/course/:id').get(AC.Findcourse);
+router.route('/course/:id').get(AC.Findcourse); 
 
 
 // CURD OPRETION 

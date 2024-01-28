@@ -22,4 +22,19 @@ const  UserUpdate = async(req,res) => {
 
 
 
-module.exports = {UserUpdate}
+
+const  DeleteCourse = async(req,res) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const updateUser = await Course.deleteOne({_id:id})
+        return res.status(201).json({msg:"Course Deleted "})        
+    } catch (error) {
+        console.log("Error in user update : ", error);
+        next(error)
+    }
+
+}
+
+
+module.exports = {UserUpdate ,DeleteCourse}

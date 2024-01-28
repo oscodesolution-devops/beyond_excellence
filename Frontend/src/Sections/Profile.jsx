@@ -89,7 +89,7 @@ const handler = (section) => {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="#">
-                            <i className="bi bi-bookmarks"></i>Assignments
+                            <i className="bi bi-bookmarks"></i>Notes
                         </a>
                     </li>
                     <li className="nav-item">

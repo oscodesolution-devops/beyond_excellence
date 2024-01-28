@@ -30,7 +30,7 @@ const NavDashboard = () => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col">
-                                        <span className="h6 font-semibold text-muted text-sm d-block mb-2">Section 1</span>
+                                        <span className="h6 font-semibold text-muted text-sm d-block mb-2">Courses</span>
                                         <span className="h3 font-bold mb-0">subtitle</span>
                                     </div>
                                     <div className="col-auto">
@@ -53,7 +53,7 @@ const NavDashboard = () => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col">
-                                        <span className="h6 font-semibold text-muted text-sm d-block mb-2">Section 2</span>
+                                        <span className="h6 font-semibold text-muted text-sm d-block mb-2">Live Classes</span>
                                         <span className="h3 font-bold mb-0">Subtitle</span>
                                     </div>
                                     <div className="col-auto">

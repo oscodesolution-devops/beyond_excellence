@@ -81,12 +81,6 @@ console.log(navLink);
                             <i className="bi bi-people"></i> Students
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link">
-                            <i className="bi bi-person-square"></i> Account
-                        </a>
-                    </li>
-
                        <li className="nav-item" onClick={logout}>
                         <a className="nav-link">
                             <i className="bi bi-box-arrow-left"></i> Logout

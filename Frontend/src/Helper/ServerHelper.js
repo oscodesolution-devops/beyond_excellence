@@ -69,3 +69,22 @@ export const makeAuthenticatedPATCHRequest = async (token , route , body) => {
     console.log(`error in fetch api `, error);
   }
 }
+
+
+
+export const makeAuthenticatedDELETERequest = async (token , route ) => {
+  try {
+    const response = await fetch(route, {
+      method: "DELETE",
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    });
+    const formattedResponse = await response.json();
+    const status = response.status;
+    const data = {data:formattedResponse,status:status}
+    return data;
+  } catch (error) {
+    console.log(`error in fetch api `, error);
+  }
+}
