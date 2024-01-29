@@ -40,7 +40,10 @@ const coursesSchema = new mongoose.Schema({
   },
    classkey:{
       type: Array,
-      
+   },
+   link:{
+    type :String,
+    require:true
    },
   createdAt: {
     type: Date,

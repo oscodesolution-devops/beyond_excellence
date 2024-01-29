@@ -8,8 +8,7 @@ import { endPoint } from '../Helper/Apis';
 import Testimonial from '../Sections/Testimonial';
 import Footer from '../Sections/Footer';
 import axios  from 'axios';
-import { toast } from "react-toastify";
-import {useSelector} from "react-redux"
+
 const CourseDetails = () => {
       const { id } = useParams(); // Extract the ID from the URL parameters
       const navigate = useNavigate();
@@ -31,6 +30,7 @@ const CourseDetails = () => {
             console.log(error);       
         }
     }
+
     const getCourse = async (id) => {
        console.log(id);
         try {
@@ -49,6 +49,7 @@ const CourseDetails = () => {
     console.log(`error in fetch api `, error);
   }
     }
+
     const handleOpenRazorpay = (data) => {
         const options = {
             key :"rzp_test_w5tUZnIztEKoBO",
@@ -87,7 +88,7 @@ const CourseDetails = () => {
  useEffect(() => {
       getCourse(id);
       getAllCourse();
-    }, [])
+    }, [id])
 const loginPage = () => {
     navigate('/login');
 }
@@ -120,13 +121,13 @@ console.log(data);
         <p className=" text-black  sm:text-[40px] xl:text-[50px] font-semibold text-center pb-[20px] " >Course Overview</p>
         <p className="   sm:text-[40px] xl:text-[15px] text-[#505050] mb-12" >{data.content}
             </p>
-        <p className=" text-theme-200  sm:text-[20px] xl:text-[20px] font-semibold text-left pb-[20px] " >Key Points</p>
+        <p className=" text-theme-200  sm:text-[20px] xl:text-[20px] font-semibold text-left pb-[20px] " >Key Highlight</p>
         <ul> 
-            {keypointArray.map((item,index)=>(
-            <li key={index} className='text-[15px] text-[#505050] list-disc'>{item}</li>
+            {data?.keypoint?.map((item,index)=>(
+                                <li key={index}  className='text-[15px] text-[#505050] list-disc'>{item}</li>
 
             ))}
-            
+
 
         </ul>
 
@@ -135,24 +136,21 @@ console.log(data);
         <div></div>
        <div>
          <p className=" text-black  sm:text-[40px] xl:text-[50px] font-semibold text-center mb-4 " >Course Content</p>
-        <div className='border-2 p-4 rounded-sm border-gray-400'>
+        <div className='border-2 p-4 rounded-sm border-gray-400 '>
 
-
-            {weekArray.map((item,index)=>(
-                <>
-             <p key={index} className="   sm:text-[40px] xl:text-[23px] text-black " >
-            Week {index+1} :{item}
-        </p>
-        <p className=" text-black pl-6 sm:text-[20px] xl:text-[18px] font-bold text-left  " >{classDetails[index]}</p>
-        <ul className='pl-12'>
+                {data?.week?.map((item,index)=>(
+                    <>
+                    <p key={index} className="   sm:text-[40px] xl:text-[23px] text-black mt-6" > Week  {index+1}: {item}</p>
+                    <p className=" text-black pl-6 sm:text-[20px] xl:text-[18px] font-bold text-left  " >Class {index+1} {data?.classDetails[index]}</p>
+                    <li className='text-[15px] text-[#505050] list-disc'>{data?.classkey[index]}</li>
+                    </>
+                ))}
+        {/* <ul className='pl-12'>
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
             <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-            <li className='text-[15px] text-[#505050] list-disc'>key points</li>
-        </ul>
-        </>
-            ))}
+        </ul> */}
          <div>
         </div>
  </div>

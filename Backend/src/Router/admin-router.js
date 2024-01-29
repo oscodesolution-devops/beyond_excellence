@@ -11,7 +11,7 @@ const CURD = require('../Controller/Crud-controller.js')
 
 
 router.route('/courseUpload').post(verifyToken,upload.single("thumbnail"),AC.CourseUpload)
-router.route('/course/update/:id').delete(verifyToken,CURD.DeleteCourse)
+router.route('/course/delete/:id').delete(verifyToken,CURD.DeleteCourse)
 
 module.exports = router;
 

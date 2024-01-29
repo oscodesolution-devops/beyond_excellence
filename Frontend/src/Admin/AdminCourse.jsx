@@ -12,10 +12,12 @@ const course = () => {
   const[price,setPrice] = useState('')
   const[content,setContent] = useState('')
   const[duration,setDuration] = useState('')
+  const[meet,setMeet] = useState('')
  
     const [inputFields, setInputFields] = useState([{ value: '' }]);
     const [week, setWeek] = useState([{ value: '' }]);
     const [classDetail, setClassDetail] = useState([{ value: '' }]);
+    const [classkey, setClassKey] = useState([{ value: '' }]);
 
   const handleChange = (index, event , n) => {
     if(n===1){
@@ -30,6 +32,10 @@ const course = () => {
     const values = [...classDetail];
     values[index].value = event.target.value;
     setClassDetail(values);
+    }else if(n===4){
+    const values = [...classkey];
+    values[index].value = event.target.value;
+    setClassKey(values);
     }
   };
 
@@ -40,6 +46,8 @@ const course = () => {
         setWeek([...week,{value: ''}]);
     }else if(n===3){
         setClassDetail([...classDetail,{value: ''}]);
+    }else if(n===4){
+        setClassKey([...classkey,{value: ''}]);
     }
   };
 
@@ -56,6 +64,10 @@ const course = () => {
     const values = [...classDetail];
     values.splice(index, 1);
     setClassDetail(values);
+    }else if(n===4){
+    const values = [...classkey];
+    values.splice(index, 1);
+    setClassKey(values);
     }
   };
 
@@ -71,10 +83,12 @@ const course = () => {
         formData.append('price', price);
         formData.append('content', content);
         formData.append('duration', duration);
+        formData.append('link', meet);
         formData.append('thumbnail', file);
         inputFields.map((field) => formData.append('keypoint',field.value));
         week.map((field) => formData.append('week',field.value));
         classDetail.map((field) => formData.append('classDetails',field.value));
+        classkey.map((field) => formData.append('classkey',field.value));
     try {
       
       const response = await axios.post("http://localhost:4000/admin/courseUpload", formData, {
@@ -123,13 +137,17 @@ console.log(classDetail.map((field) => field.value));
            <label htmlFor="name" className="block mb-2 font-bold text-gray-600">Duration (Year)</label>
            <input onChange={(e)=>setDuration(e.target.value)} type="text" id="number" name="duration" placeholder="Put in your Course Duration." className="border border-gray-300 shadow p-3 w-full rounded mb-" />
          </div>
+         <div className="mb-5">
+           <label  className="block mb-2 font-bold text-gray-600">Meeting Link </label>
+           <input onChange={(e)=>setMeet(e.target.value)} type="text" id="number" name="meet" placeholder="Put in your Course Classes Link ." className="border border-gray-300 shadow p-3 w-full rounded mb-" />
+         </div>
 
            <label  className="block mb-2 font-bold text-gray-600">Key Highlights</label>
           {inputFields.map((field, index) => (
           <div key={index}>
             <input
               type="text"
-              placeholder="Enter a value"
+              placeholder={` ${index+1} : Enter Course Key Points`}
               value={field.value}
               className="border border-gray-300 shadow p-3 w-[80%] rounded mb-2 mr-2"
               onChange={(e) => handleChange(index, e , 1)}
@@ -148,7 +166,7 @@ console.log(classDetail.map((field) => field.value));
           <div key={index}>
             <input
               type="text"
-              placeholder="Enter a value"
+              placeholder={`Week ${index+1} course Details`}
               value={field.value}
               className="border border-gray-300 shadow p-3 w-[80%] rounded mb-2 mr-2"
               onChange={(e) => handleChange(index, e , 2)}
@@ -168,7 +186,7 @@ console.log(classDetail.map((field) => field.value));
           <div key={index}>
             <input
               type="text"
-              placeholder="Enter a value"
+              placeholder={`Class ${index+1} : Topic `}
               value={field.value}
               className="border border-gray-300 shadow p-3 w-[80%] rounded mb-2 mr-2"
               onChange={(e) => handleChange(index, e , 3)}
@@ -179,6 +197,26 @@ console.log(classDetail.map((field) => field.value));
           </div>
         ))}
         <button type="button" onClick={()=>handleAddField(3)}>
+          <IoIosAddCircle size={"35px"} color={'#CA2953'}/>
+        </button>
+
+        
+         <label  className="block mb-2 font-bold text-gray-600">Classes Key points</label>
+          {classkey.map((field, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              placeholder={` class ${index+1} key point`}
+              value={field.value}
+              className="border border-gray-300 shadow p-3 w-[80%] rounded mb-2 mr-2"
+              onChange={(e) => handleChange(index, e , 4)}
+            />
+            <button type="button" onClick={() => handleRemoveField(index , 4)}>
+              <MdOutlineRemoveCircle size={"35px"}/>
+            </button>
+          </div>
+        ))}
+        <button type="button" onClick={()=>handleAddField(4)}>
           <IoIosAddCircle size={"35px"} color={'#CA2953'}/>
         </button>
 

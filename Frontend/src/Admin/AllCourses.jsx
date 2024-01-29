@@ -5,7 +5,9 @@ import { MdEdit } from "react-icons/md";
 import { makeAuthenticatedDELETERequest, makeUnauthenticatedGETRequest } from '../Helper/ServerHelper'
 import { endPoint } from '../Helper/Apis'
 import { Link } from 'react-router-dom'
+import {useNavigate} from "react-router-dom"
 const AllCourses = () => {
+        const navigate = useNavigate();
     const token = localStorage.getItem("token")
       const [data,setData] = useState([])
 
@@ -22,10 +24,14 @@ const AllCourses = () => {
         }
     }
 const deleteCourse = async (id) => {
-    alert(id)
-    // const route = `http://localhost:4000/admin//course/update/${id}`
-    // const response = await makeAuthenticatedDELETERequest(token, route)
-    // console.log("25",response);
+    const route = `http://localhost:4000/admin/course/delete/${id}`
+    const response = await makeAuthenticatedDELETERequest(token, route)
+
+    if(response.status === 201){
+         window.location.reload();
+    }
+    console.log("25",response);
+    
 
 }
     useEffect(() => {
