@@ -1,9 +1,29 @@
 import { Link } from "react-router-dom";
-const NavCourse = ({course , data}) => {
-const coursesDetails = data.data.map(item => {
-  const courseDetail = course.find(c => c._id === item.courseId);
-  return courseDetail ? { courseId: item.courseId, ...courseDetail } : null;
+import { makeAuthenticatedGETRequest } from "../Helper/ServerHelper";
+import { useState } from "react";
+import {useNavigate} from "react-router-dom"
+const NavCourse =  ({course , data}) => {
+    const navigate = useNavigate()
+    const token = localStorage.getItem("token")
+
+    const coursesDetails = data.data.map(item => {
+    const courseDetail = course.find(c => c._id === item.courseId);
+    return courseDetail ? { courseId: item.courseId, ...courseDetail } : null;
 });
+
+const [url,setUrl] = useState("")
+const useLinkClickHandler = async (id) => {
+    try{
+      let route = `http://localhost:4000/api/auth/Class/${id}`
+      const Link = await makeAuthenticatedGETRequest(token,route);
+      setUrl(Link.data)
+       window.location.href = Link.data;
+    }
+      catch(err){
+        alert('You are not authorized to access this page')
+      }
+
+}
 const filterCourse = coursesDetails.filter(Boolean) ;
 
   return (
@@ -35,8 +55,8 @@ const filterCourse = coursesDetails.filter(Boolean) ;
                     </div>
                     <div className="flex justify-between space-x-2">
                         <a className="font-medium text-[15px] xl:text-[24px] inline-flex items-center justify-center px-3 py-1.5 rounded leading-5 text-black hover:underline focus:outline-none focus-visible:ring-2" href="#0">&#8377;{item.price}</a>
-                        <a className="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-theme-200 focus:outline-none focus-visible:ring-2 hover:bg-indigo-600 text-white">
-                            <Link to={`/courses/${item._id}`} >Explore</Link></a>
+                        <a onClick={()=>useLinkClickHandler(`${item._id}`)} className="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-theme-200 focus:outline-none focus-visible:ring-2 hover:bg-indigo-600 text-white">
+                            Explore</a>
                     </div>
                 </div>
             </div>

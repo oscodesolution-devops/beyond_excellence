@@ -89,6 +89,21 @@ try{
 }
 }
 
+const classLink =async (req,res) => {
+    try {
+        const courseId = req.params.id;
+        const pay  = await Course.findOne({_id:courseId})
+        if(!pay) {
+            return res.error('Not for sale')
+            }
+            let link = pay.link
+            return res.json(link)
+    } catch (error) {
+        next(error)
+        
+    }
+
+}
 // ============================================  ADMIN   ===================================
 
 const Admin = async (req,res) => {
@@ -177,5 +192,5 @@ const Payment = async (req,res) => {
     }
 }
 
-module.exports = {Home , Registration ,Login  ,Admin,CourseUpload,Getcourse,Findcourse ,UserData ,Payment,Purchases ,Getuser}
+module.exports = {Home , Registration ,Login  ,Admin,CourseUpload,Getcourse,Findcourse ,UserData ,Payment,Purchases ,Getuser ,classLink}
   

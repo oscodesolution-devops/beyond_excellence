@@ -1,18 +1,27 @@
 import { useEffect ,useState } from 'react'
 
 import { makeAuthenticatedGETRequest, makeUnauthenticatedGETRequest } from '../Helper/ServerHelper'
-import { endPoint } from '../Helper/Apis'
+import { endPoint ,adminPoint} from '../Helper/Apis'
+import Chart from './Chart'
+import ChartWithXAxisPadding from './ChartWithXAxisPadding'
+import { BarChart, WidthFull } from '@mui/icons-material'
+import BarCharts from './BarChart'
 const adminDashboard = () => {
     const token = localStorage.getItem("token")
   const [data,setData] = useState([])
   const [user,setUser] = useState([])
   const [purchase,setPurchase] = useState([])
-
+    const [amount,setAmount] = useState()
+     const [oldData, setOldData] = useState([]);
     const getAllCourse = async () => {
         try {
             const response = await makeUnauthenticatedGETRequest(endPoint.ALLCOURSE_API);
             const userRes = await makeAuthenticatedGETRequest(token,endPoint.GET_ALL_USERS);
             const purchaseRes = await makeAuthenticatedGETRequest(token,endPoint.ALL_PURCHASES);
+            const total = await makeAuthenticatedGETRequest(token ,adminPoint.PURCHASE_DETAILS)
+            if(total.status === 200){
+                setAmount(total.data.map(item => item.courseId.price).reduce((total, amount) => total + parseInt(amount), 0))
+            }
             setUser(userRes.data.user)
             setPurchase(purchaseRes.data.user)
             if(response.status === 200){
@@ -22,13 +31,57 @@ const adminDashboard = () => {
             console.log(error);       
         }
     }
+ const datass = [
+    { name: 'Jan', Amount: 5000 },
+    { name: 'Feb', Amount: 7000 },
+    { name: 'Mar', Amount: 9000 },
+    { name: 'Apr', Amount: 10000 },
+    { name: 'May', Amount: 2000 },
+    { name: 'Jun', Amount: 1000 },
 
+
+
+    // Add more data points as needed
+  ];
+
+    const XAxis = [
+    { name: 'Jan', Course: 0 },
+    { name: 'Feb', Course: 4 },
+    { name: 'Mar', Course: 3 },
+    { name: 'Apr', Course: 1 },
+    { name: 'May', Course: 6 },
+    { name: 'Jun', Course: 2 },
+
+
+  ];
+ const formatNumber = (value) => {
+  const suffixes = ['', 'K', 'M', 'B', 'T'];
+
+  let magnitude = 0;
+  let formattedValue;
+
+  if (typeof value === 'number') {
+    while (value >= 1000 && magnitude < suffixes.length - 1) {
+      value /= 1000;
+      magnitude++;
+    }
+
+    // Use toFixed only if there are decimal places
+    formattedValue = value % 1 !== 0 ? value.toFixed(1) : value;
+  } else {
+    formattedValue = value; // If value is not a number, keep it as is
+  }
+
+  return `${formattedValue}${suffixes[magnitude]}`;
+};
+  useEffect(() => {
+    if ( amount !== undefined ) {
+  setOldData((prevHistory) => [...prevHistory, { name: 'Total', value: amount }]);    }
+  }, [amount]);
     useEffect(() => {
       getAllCourse();
     }, [])
-    console.log("===>1",data);
-    console.log("===>2",purchase);
-    console.log("===>3",user);
+console.log(oldData);
   return (
      <>
      <div className="h-screen flex-grow-1 overflow-y-lg-auto">
@@ -127,8 +180,8 @@ const adminDashboard = () => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col">
-                                        <span className="h6 font-semibold text-muted text-sm d-block mb-2">New Enrolled</span>
-                                        <span className="h3 font-bold mb-0">Subtitle</span>
+                                        <span className="h6 font-semibold text-muted text-sm d-block mb-2">Total Revenue</span>
+                                        <span className="h3 font-bold mb-0">{formatNumber(amount)}</span>
                                     </div>
                                     <div className="col-auto">
                                         <div className="icon icon-shape bg-warning text-white text-lg rounded-circle">
@@ -146,60 +199,35 @@ const adminDashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div className="card shadow border-0 mb-7">
-                    <div className="card-header">
-                        <h5 className="mb-0">Applications</h5>
+                
+                <div className='w-[100%] flex flex-row gap-4'>
+                   <div className=" bg-white border border-gray-200 h-[47vh] rounded-lg shadow w-[450px] dark:bg-gray-800 dark:border-gray-700">
+                        <Chart data = {datass} />
+                        <div className="p-5">
+                            <a href="#">
+                                <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Monthly Sales</h5>
+                            </a>
+                            <p className="mb-3 font-normal text-gray-700 text-[15px] dark:text-gray-400">6 Months Groth</p>
                     </div>
-                    <div className="table-responsive">
-                        <table className="table table-hover table-nowrap">
-                            <thead className="thead-light">
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Company</th>
-                                    <th scope="col">Offer</th>
-                                    <th scope="col">Meeting</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                         <tbody>
-                           <tr>
-                                    <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" className="avatar avatar-sm rounded-circle me-2"/>
-                                        <a className="text-heading font-semibold" href="#">
-                                            Robert Fox
-                                        </a>
-                                    </td>
-                                    <td>
-                                        Feb 15, 2021
-                                    </td>
-                                    <td>
-                                        <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-1.png" className="avatar avatar-xs rounded-circle me-2" />
-                                        <a className="text-heading font-semibold" href="#">
-                                            Dribbble
-                                        </a>
-                                    </td>
-                                    <td>
-                                        $3.500
-                                    </td>
-                                    <td>
-                                        <span className="badge badge-lg badge-dot">
-                                            <i className="bg-success"></i>Scheduled
-                                        </span>
-                                    </td>
-                                    <td className="text-end">
-                                        <a href="#" className="btn btn-sm btn-neutral">View</a>
-                                        <button type="button" className="btn btn-sm btn-square btn-neutral text-danger-hover">
-                                            <i className="bi bi-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                         </tbody>
-                        </table>
-                    </div>
-                    <div className="card-footer border-0 py-5">
-                        <span className="text-muted text-sm">Showing 10 items out of 250 results found</span>
-                    </div>
+                </div>
+                   <div className=" bg-white border border-gray-200 h-[47vh] rounded-lg shadow w-[450px] dark:bg-gray-800 dark:border-gray-700">
+                        <ChartWithXAxisPadding data={XAxis}/>
+                        <div className="p-5">
+                            <a >
+                                <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Monthly Course Upload</h5>
+                            </a>
+                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">6 Months Course Upload</p>
+                        </div>
+                   </div>
+                   <div className=" bg-white border border-gray-200 h-[47vh] rounded-lg shadow w-[450px] dark:bg-gray-800 dark:border-gray-700">
+                        <BarCharts/>
+                        <div className="p-5">
+                            <a >
+                                <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Monthly Student  Enrolled</h5>
+                            </a>
+                            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">6 Months Student Groth</p>
+                        </div>
+                   </div>
                 </div>
             </div>
         </main>

@@ -8,7 +8,6 @@ import NavDashboard from '../Profile/NavDashboard';
 import NavCourse from '../Profile/NavCourse';
 import Account from '../Pages/Account';
 
-
 const Profile = () => {
     const navigate = useNavigate();
   const [userData,setUserData] = useState([])
@@ -17,43 +16,55 @@ const Profile = () => {
   const [course,setCourse] = useState([])
   const [toggle,setToggle] = useState(false)
   const [admin,setAdmin] = useState();
-  const [navLink,setNavlink] = useState("dashboard");
+  const [navLink, setNavlink] = useState("dashboard");
+  const token = localStorage.getItem("token");
+
+
   const logout = () => {
         localStorage.removeItem("token");
         window.open(`http://localhost:4000/logout`,"_self")
-  }
-const userDatas = async () => {
-const token = localStorage.getItem("token");
-    const response = await makeAuthenticatedGETRequest(token ,endPoint.GET_ALL_USER);
-    setUserData(response.data.msg)
+  }      
+      
+    const userDataGet = async () => {
+      try{
+      console.log("in");
+    const response = await makeAuthenticatedGETRequest(token ,endPoint.GET_ALL_USER);  
+    setUserData(response?.data?.msg)
     setAdmin(response?.data?.msg?.isAdmin)
     setUserId(response?.data?.msg)
     const purchase = await makeAuthenticatedGETRequest(token ,endPoint.PURCHASES);
-
-    setParchaseData(purchase.data)
-    console.log(purchase.data)
-
+    setParchaseData(purchase?.data)
+    console.log(purchase?.status)
     const course = await makeUnauthenticatedGETRequest(endPoint.ALLCOURSE_API);
-    setCourse(course.data.course)
-        
-}
+    setCourse(course?.data?.course)    
+      }
+      catch(error){
+        alert('Error in getting data')
+      }
+}    
 
-console.log("userId ==> \n",userId);
+console.log("userId ==> \n",parchaseData);
 
 const handler = (section) => {
     setNavlink(section);
-}
+}  
 
 
-  useEffect(() => {
-    userDatas();
-  }, [])
+useEffect(() => {
+        console.log("in");
 
+  userDataGet().catch((error) => {
+    console.error('Error in getting data:', error);
+    // You can add additional error handling here if needed
+  });
+}, []);
+  
   useEffect(() => {
     if(admin){
        navigate('/admin')
     }
   }, [admin])
+
   return (
     <>
 <div>
@@ -117,8 +128,7 @@ const handler = (section) => {
     </div>
 
    {navLink === "dashboard" && (  
-  <NavDashboard/>
-    
+  <NavDashboard  course ={course} data = {parchaseData} /> 
     )}
   
   {navLink === "course" && (   <NavCourse course ={course} data = {parchaseData}/>
@@ -126,6 +136,7 @@ const handler = (section) => {
 
  {navLink === "account" && (  <Account user={userId}/> )}
 </div>
+
 </div>
 
 {/* Model */}

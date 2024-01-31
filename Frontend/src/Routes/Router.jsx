@@ -12,7 +12,7 @@ import Dashboard from "../Admin/Dashboard"
 // import AboutUs from "../Pages/AboutUs"
 
 const Router = () => {
-  const isLogin = localStorage.getItem("isLogin");
+  const isLogin = localStorage.getItem("token");
   console.log(isLogin);
   return (
     <>
@@ -26,7 +26,7 @@ const Router = () => {
             {/* <Route path="/about" element={<AboutUs/>}/> */}
             <Route path="/account" element={<Account/>}/>
             <Route path="/courses/:id" element={<CourseDetails/>}/>
-            <Route path="/profile" element={<Profile/> }/>
+            <Route path="/profile" element={ isLogin === null  ? <Login/> : <Profile/> }/>
             <Route path="*" element={<ErrorPage/>}/>
             <Route path="/admin" element={<Dashboard/>}/>
 

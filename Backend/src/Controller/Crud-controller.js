@@ -37,4 +37,21 @@ const  DeleteCourse = async(req,res) => {
 }
 
 
-module.exports = {UserUpdate ,DeleteCourse}
+const GetPayment = async(req,res) => {
+    try {
+        const purchase = await Purchase.find()
+        .populate('courseId', 'title link price')
+        .populate('studentId', 'name email') // Specify fields to populate for the user
+      if (!purchase) {
+        next(error)
+        }
+        res.status(200).json(purchase);
+        
+    } catch (error) {
+        console.log("Error in getting payment details : ", error);
+        next(error)
+        
+    }
+}
+
+module.exports = {UserUpdate ,DeleteCourse , GetPayment}

@@ -10,7 +10,6 @@ import Router from './Routes/Router';
   import axios from "axios"
 function App() {
   const dispatch = useDispatch();
-   const token = useSelector((state) => state.auth.token);console.log("ttokenn",token);
 // YourComponent.js
 const [data,setData] = useState({})
   const getUser = async() => {

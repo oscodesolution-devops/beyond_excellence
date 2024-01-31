@@ -9,3 +9,8 @@ export const  endPoint =  {
     ALL_PURCHASES : BASE_URL + "/purchase"
 }
 
+const ADMIN_URL = "http://localhost:4000/admin"
+
+export const adminPoint = {
+    PURCHASE_DETAILS : ADMIN_URL + "/payments"
+}
