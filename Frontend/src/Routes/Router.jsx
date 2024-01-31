@@ -13,7 +13,6 @@ import Dashboard from "../Admin/Dashboard"
 
 const Router = () => {
   const isLogin = localStorage.getItem("token");
-  console.log(isLogin);
   return (
     <>
   <BrowserRouter>

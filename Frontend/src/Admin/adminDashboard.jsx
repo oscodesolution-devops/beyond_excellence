@@ -200,7 +200,7 @@ console.log(oldData);
                     </div>
                 </div>
                 
-                <div className='w-[100%] flex flex-row gap-4'>
+                <div className='w-[100%] flex xl:flex-row sm:flex-col flex-col   gap-4'>
                    <div className=" bg-white border border-gray-200 h-[47vh] rounded-lg shadow w-[450px] dark:bg-gray-800 dark:border-gray-700">
                         <Chart data = {datass} />
                         <div className="p-5">

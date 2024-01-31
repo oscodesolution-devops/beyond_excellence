@@ -21,9 +21,6 @@ const Course = () => {
     useEffect(() => {
       getAllCourse();
     }, [])
-    
-console.log(data);
-
   return (
     <>
     <Navbar/>

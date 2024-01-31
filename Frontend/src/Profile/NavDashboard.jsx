@@ -1,8 +1,6 @@
 import {useEffect, useState} from 'react'
 
 const NavDashboard = ({ course , data }) => {
-console.log(course,data);
-const [datas,setDatas] = useState([])
 
 
 

@@ -17,7 +17,6 @@ const Navbar = () => {
   const [data,setData] = useState([])
 
   const isLogin = localStorage.getItem("token");
-  console.log("20",isLogin);
   
   // const logout = () => {
   //         dispatch(setToken(""));
@@ -45,7 +44,7 @@ const Navbar = () => {
                         <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="#"><Link to="/courses">Courses</Link></a>
                     </li>
                     <li>
-                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="#"><Link to="/courses">Testimonials</Link></a>
+                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="/#testimonial">Testimonials</a>
                     </li>
                 </ul>
                 <div className={`${isOpen?`hidden`:`block`} xl:hidden md:hidden flex items-center xl:gap-6 mt-6 gap-4`}>

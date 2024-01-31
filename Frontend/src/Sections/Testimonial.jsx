@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './Testimonial.css';
-import image from "../../public/images/1.png"
+import image from "../../public/images/abhi.png"
 // import required modules
 import { Pagination , Autoplay } from 'swiper/modules';
 
@@ -27,7 +27,7 @@ const Testimonial = () => {
   };
   return (
   <>
-  <div className=" md:h-[60vh] xl:h-[100vh] h-auto w-[100%] px-[100px]  mb-0">
+  <div id='testimonial' className=" md:h-[60vh] xl:h-[100vh] h-auto w-[100%] px-[100px]  mb-0">
     <div className='text-center md:mb-4 md:mt-4 mb-6 text-[40px] xl:text-[64px] font-semibold'>Testimonials</div>
       <Swiper
       breakpoints={breakpoints}

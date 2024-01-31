@@ -2,8 +2,9 @@
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const payment = require("../Model/purchase-model")
+require('dotenv').config()
 module.exports.order = (req,res) => {
-var instance = new Razorpay({ key_id: 'rzp_test_w5tUZnIztEKoBO', key_secret: 'eLG7wVfzLAJJVVeIi6Q58QLz' })
+var instance = new Razorpay({ key_id: process.env.RAZOR_PAY_KEY_ID, key_secret: process.env.RAZOR_PAY_SECRET_KEY })
 
 var options = {
   amount: req.body.amount * 100,  // amount in the smallest currency unit

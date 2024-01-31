@@ -16,7 +16,6 @@ const [data,setData] = useState({})
     try {
       const res = await axios.get("http://localhost:4000/login/success",{withCredentials:true},)
       setData(res.data.user);
-      console.log("20=>",res.data.user);
       dispatch(setToken(res.data.token));   
 
     } catch (error) {

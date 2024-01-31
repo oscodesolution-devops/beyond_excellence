@@ -18,7 +18,6 @@ const CourseDetails = () => {
         const storedValue = localStorage.getItem('isLogin');
         let token = localStorage.getItem('token');
       
-       console.log("pp=>",token);
     const getAllCourse = async () => {
         try {
             const response = await makeUnauthenticatedGETRequest(endPoint.ALLCOURSE_API);
@@ -32,7 +31,6 @@ const CourseDetails = () => {
     }
 
     const getCourse = async (id) => {
-       console.log(id);
         try {
     const response = await fetch(`http://localhost:4000/api/auth/course/${id}`, {
       method: "GET",
@@ -92,7 +90,6 @@ const CourseDetails = () => {
 const loginPage = () => {
     navigate('/login');
 }
-console.log(data);
  return (
     <>
     <Navbar/>

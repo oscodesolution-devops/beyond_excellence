@@ -2,8 +2,12 @@ import {useState} from 'react'
 import { FcGoogle } from "react-icons/fc";
 import Navbar from "../Components/Navbar";
 import { Link } from 'react-router-dom';
+import { makeUnauthenticatedPOSTRequest } from '../Helper/ServerHelper';
+import { endPoint } from '../Helper/Apis';
+import {toast} from "react-toastify"
+import {useNavigate} from 'react-router-dom'
 const Signin = () => {
-
+const navigate = useNavigate()
     const [data,setData] = useState({
         name:"",
         last:"",
@@ -25,10 +29,30 @@ const Signin = () => {
      const googleAuth = async () => {
     window.open(`http://localhost:4000/auth/google/callback`,"_self")
   }
-     const signinHandle =(e)=>{
-        e.preventDefault();
-        console.log(data);
-        
+     const signinHandle = async (e)=>{
+       e.preventDefault();
+        const toastId = toast.loading("Loading...");
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('last', data.last);
+        formData.append('email', data.email);
+        formData.append('password', data.password);
+        formData.append('number', data.number);
+        try{
+          const res = await makeUnauthenticatedPOSTRequest(endPoint.REGISTER_API , data)
+          if(res.status === 422){
+            toast.error(res.data.message)
+          }else{
+            localStorage.setItem('token' , res.data.accessToken)
+            navigate("/")
+
+          }
+      }catch(error){
+        alert("Error Occured");
+      }
+      toast.dismiss(toastId);
+      
+      
     }
     return (
     <>
@@ -54,24 +78,24 @@ const Signin = () => {
       <form onSubmit={signinHandle} className="mt-2" action="#" method="POST">
          <div>
           <label className="block text-gray-700">Name</label>
-          <input onChange={changeHandler} type="text" name="name" id="" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
+          <input onChange={changeHandler} type="text" name="name"  placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
         </div>
          <div>
           <label className="block text-gray-700">Last</label>
-          <input onChange={changeHandler} type="text" name="last" id="" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
+          <input onChange={changeHandler} type="text" name="last"  placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
         </div>
         <div>
           <label className="block text-gray-700">Email Address</label>
-          <input onChange={changeHandler} type="email" name="email" id="" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
+          <input onChange={changeHandler} type="email" name="email"  placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
         </div>
         <div className="">
           <label className="block text-gray-700">Password</label>
-          <input onChange={changeHandler}  type="password" name="password" id="" placeholder="Enter Password" minlength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+          <input onChange={changeHandler}  type="password" name="password"  placeholder="Enter Password" minlength="6" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                 focus:bg-white focus:outline-none" required />
         </div>
          <div>
           <label className="block text-gray-700">Mobile no.</label>
-          <input onChange={changeHandler} type="text" name="number" id="" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
+          <input onChange={changeHandler} type="text" name="number"  placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  required />
         </div>
         <button className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
               px-4 py-3 mt-6">Sign In</button>
