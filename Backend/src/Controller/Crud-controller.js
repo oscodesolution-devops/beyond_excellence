@@ -54,4 +54,21 @@ const GetPayment = async(req,res) => {
     }
 }
 
-module.exports = {UserUpdate ,DeleteCourse , GetPayment}
+
+
+const search = async(req,res) => {
+    try {
+        const name = req.params.name;
+        const response = await User.findOne({
+            $or: [{email:name},{name:name},{number:name}]
+        }).select("-password")
+        if(!response){
+           return res.status(400).send("Data not found")
+            }
+        res.status(200).json(response)
+    } catch (error) {
+        console.log("Error to Search  : ", error);
+        next(error)
+    }
+}
+module.exports = {UserUpdate ,DeleteCourse , GetPayment ,search }

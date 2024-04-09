@@ -35,16 +35,16 @@ const Navbar = () => {
                 className={`${isOpen ? `hidden`:`absolute`} xl:block md:block  nav-links duration-500 md:static xl:z-0 z-[99999]  bg-white  md:min-h-fit xl:h-auto xl:w-auto min-h-[90vh] w-[70vw] gap-3 items-start pl-10 pt-6 xl:pl-0 xl:pt-0 xl:right-0 xl:top-0 xl:flex-row -right-[30vw] top-[6vh]  flex-col  md:w-auto  flex xl:items-center xl:px-5`}>
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 ">
                     <li>
-                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="#"><Link to="/">Home</Link></a>
+                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" ><Link to="/">Home</Link></a>
                     </li>
                     <li>
-                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="#"><Link to="/">About</Link></a>
+                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" ><Link to="/about">About</Link></a>
                     </li>
                     <li>
-                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="#"><Link to="/courses">Courses</Link></a>
+                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" ><Link to="/courses">Courses</Link></a>
                     </li>
                     <li>
-                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="/#testimonial">Testimonials</a>
+                        <a className="hover:border-theme-200 hover:border-b-2 pb-2 font-sans font-semibold" href="http://localhost:5173/#testimonial">Testimonials</a>
                     </li>
                 </ul>
                 <div className={`${isOpen?`hidden`:`block`} xl:hidden md:hidden flex items-center xl:gap-6 mt-6 gap-4`}>

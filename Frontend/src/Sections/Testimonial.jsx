@@ -46,7 +46,7 @@ const Testimonial = () => {
         <SwiperSlide>
             <div className="flex flex-col items-center ">
             <img src={image}  alt='/'/>
-            <div className="xl:text-[40px] md:text-[40px] text-[30px]">Elizabeth Thomas</div>
+            <div className="xl:text-[40px] md:text-[40px] text-[30px]">Abhishek </div>
             <p className="text-[15px] text-[#1E1E1E] xl:w-[50%] md:w-[50%] w-[100%]">Improve your grammar, vocabulary, and communication skills for professional success and academic pursuits..</p>
             </div>
         </SwiperSlide>
@@ -60,7 +60,7 @@ const Testimonial = () => {
          <SwiperSlide>
             <div className="flex flex-col items-center">
             <img src={image} alt='/'/>
-            <div className="xl:text-[40px] md:text-[40px] text-[30px]">Elizabeth Thomas</div>
+            <div className="xl:text-[40px] md:text-[40px] text-[30px]">Abhishek </div>
             <p className="text-[15px] text-[#1E1E1E] xl:w-[50%] md:w-[50%] w-[100%]">Improve your grammar, vocabulary, and communication skills for professional success and academic pursuits..</p>
             </div>
         </SwiperSlide>
@@ -74,7 +74,7 @@ const Testimonial = () => {
          <SwiperSlide>
             <div className="flex flex-col items-center">
             <img src={image} alt='/'/>
-            <div className="xl:text-[40px] md:text-[40px] text-[30px]">Elizabeth Thomas</div>
+            <div className="xl:text-[40px] md:text-[40px] text-[30px]">Abhishek </div>
             <p className="text-[15px] text-[#1E1E1E] xl:w-[50%] md:w-[50%] w-[100%]">Improve your grammar, vocabulary, and communication skills for professional success and academic pursuits..</p>
             </div>
         </SwiperSlide>

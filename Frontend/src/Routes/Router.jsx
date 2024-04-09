@@ -9,8 +9,7 @@ import Course from "../Pages/Course"
 import CourseDetails from "../Pages/CourseDetails"
 import Account from "../Pages/Account"
 import Dashboard from "../Admin/Dashboard"
-// import AboutUs from "../Pages/AboutUs"
-
+import AboutUs from "../Pages/AboutUs"
 const Router = () => {
   const isLogin = localStorage.getItem("token");
   return (
@@ -22,15 +21,12 @@ const Router = () => {
             <Route path="/signin" element={<Signin/>}/>
             <Route path="/courses" element={<Course/>}/>
             <Route path="/model" element={<Model/>}/>
-            {/* <Route path="/about" element={<AboutUs/>}/> */}
+            <Route path="/about" element={<AboutUs/>}/>
             <Route path="/account" element={<Account/>}/>
             <Route path="/courses/:id" element={<CourseDetails/>}/>
             <Route path="/profile" element={ isLogin === null  ? <Login/> : <Profile/> }/>
             <Route path="*" element={<ErrorPage/>}/>
             <Route path="/admin" element={<Dashboard/>}/>
-
-
-
           {/* PRAIVATE ROUTE */}
         </Routes>
     </BrowserRouter>

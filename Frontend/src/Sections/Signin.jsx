@@ -40,10 +40,11 @@ const navigate = useNavigate()
         formData.append('number', data.number);
         try{
           const res = await makeUnauthenticatedPOSTRequest(endPoint.REGISTER_API , data)
+          console.log(res);
           if(res.status === 422){
             toast.error(res.data.message)
           }else{
-            localStorage.setItem('token' , res.data.accessToken)
+            localStorage.setItem('token' , res)
             navigate("/")
 
           }

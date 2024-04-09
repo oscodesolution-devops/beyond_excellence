@@ -50,6 +50,24 @@ export const makeAuthenticatedGETRequest = async (token , route) => {
     return data;
 }
 
+export const makeAuthenticatedPOSTRequest = async (token ,route,body) => {
+  try {
+    const response = await fetch(route, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const formattedResponse = await response.json();
+    const status = response.status;
+    const data = {data:formattedResponse,status:status}
+    return data;
+  } catch (error) {
+    console.log(`error in fetch api `, error);
+  }
+}
 
 export const makeAuthenticatedPATCHRequest = async (token , route , body) => {
   try {

@@ -77,7 +77,7 @@ const deleteCourse = async (id) => {
                         <FaTrash /> 
                         </a>
                         <a className="font-semibold text-sm inline-flex items-center justify-center px-3 py-1.5 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out bg-theme-200 focus:outline-none focus-visible:ring-2 hover:bg-indigo-600 text-white">
-                            <Link to={`/courses/${item._id}`} >Explore</Link>
+                            <Link to={`/courses/${item._id}`} >Explores</Link>
                         </a>
                         </div>
                         <div>

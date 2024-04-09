@@ -74,7 +74,7 @@ try{
     return res.json({course})
 
 }catch(error){
-    next(error)
+   console.log(error);
 }
 }
 
