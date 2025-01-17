@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const coursesSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -11,49 +12,55 @@ const coursesSchema = new mongoose.Schema({
   },
   images: {
     type: String, // Store image URLs
-        required: true,
-
+    required: true,
   },
   price: {
     type: String,
     required: true,
-    min: 0,
   },
   duration: {
     type: String,
     required: true,
-    min: 0,
   },
   content: {
-    type: String, // Array of content sections
+    type: String,
     required: true,
   },
-  week:{
-    type:Array,
-    require:true,
+  week: {
+    type: [String], // Array of strings
+    required: true,
   },
-   classDetails:{
-    type:Array,
+  classDetails: {
+    type: [
+      {
+        className: String,
+        instructor: String,
+        schedule: String,
+      },
+    ],
+    required: true,
   },
-   keypoint:{
-    type:Array,
+  keypoint: {
+    type: [String],
   },
-   classkey:{
-      type: Array,
-   },
-   link:{
-    type :String,
-    require:true
-   },
+  classkey: {
+    type: [String],
+  },
+  link: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default:Date.now
+    default: Date.now,
   },
-  course:{type:Array},
+  course: {
+    type: [String],
+  },
   purchaseDate: {
     type: Date,
   },
@@ -62,10 +69,9 @@ const coursesSchema = new mongoose.Schema({
   },
   enrolledStudents: {
     type: mongoose.Schema.Types.ObjectId,
-    ref : 'user' 
-  }
-
+    ref: 'user',
+  },
 });
 
-const Course = new mongoose.model('course', coursesSchema) ;
+const Course = mongoose.model('course', coursesSchema);
 module.exports = Course;

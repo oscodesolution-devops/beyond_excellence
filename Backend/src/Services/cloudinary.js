@@ -11,27 +11,27 @@ cloudinary.config({
 
 
 
-// const uploadOnCloudinary = async (localFilePath) => {
-//   try {
-//     if(!localFilePath) return null
+const uploadOnCloudinary = async (localFilePath) => {
+  try {
+    if(!localFilePath) return null
 
-//     // UPLOAD THE FILE IN CLOUDINARY 
+    // UPLOAD THE FILE IN CLOUDINARY 
 
-//     const response = await cloudinary.uploader.upload(localFilePath)
-//     console.log("==>");
-//       console.log("Check By Chiku  22 Cloudinary", response);
-//       console.log("==>");
+    const response = await cloudinary.uploader.upload(localFilePath)
+    console.log("==>");
+      console.log("Check By Chiku  22 Cloudinary", response);
+      console.log("==>");
 
-//       return response
+      return response
     
-//     // FILE HAS BEEN UPLOADED SUCCESSFULLY
-//   } catch (error) {
-//     fs.unlinkSync(localFilePath)
-//     console.log(error);
-//     return null
+    // FILE HAS BEEN UPLOADED SUCCESSFULLY
+  } catch (error) {
+    fs.unlinkSync(localFilePath)
+    console.log(error);
+    return null
     
-//   }
+  }
 
-// }
+}
 
 module.exports = cloudinary;

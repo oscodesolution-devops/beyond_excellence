@@ -10,7 +10,7 @@ const CURD = require('../Controller/Crud-controller.js')
 
 
 
-router.route('/courseUpload').post(verifyToken,upload.single("thumbnail"),AC.CourseUpload)
+router.route('/courseUpload').post(upload.single("image"),AC.CourseUpload)
 router.route('/course/delete/:id').delete(verifyToken,CURD.DeleteCourse)
 router.route('/payments').get(verifyToken,CURD.GetPayment)
 router.route('/search/:name').get(verifyToken,CURD.search)

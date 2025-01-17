@@ -114,43 +114,44 @@ const Admin = async (req,res) => {
   }
 }
 
-const CourseUpload = async (req,res) => {
+const CourseUpload = async (req, res) => {
     try {
-       
-    const {title,description,price,content ,duration,week ,keypoint,classDetails,classkey ,link} = req.body;
-
-    // const thumbnailLocalPath = req.files?.file[0]?.path ;
-    // console.log("==>");
-    //   console.log("Check By Chiku", req.files.file);
-    //   console.log("==>");
-    // if(!thumbnailLocalPath) {
-    //     console.log('No Thumbnail')
-    // }
-    // const thumbnail = await uploadOnCloudinary(thumbnailLocalPath)
-    // console.log("==>");
-    //   console.log("Check By Chiku 112", thumbnail.url);
-    //   console.log("==>");
-
-    // if(!thumbnail) {
-    //     conssole.log('No Thumbnail')
-    // }
-
-      const image = await cloudinary.uploader.upload(req.file.path, function (err , result){
-        if(err){
-            console.log(err);
-        }
-        // res.json(result.url)
+      const { title, description, price, content, duration, week, keypoint, classDetails, classkey, link } = req.body;
+  
+      // Validate required fields
+      if (!title || !description || !price || !duration || !link) {
+        return res.status(400).json({ error: "All required fields must be provided." });
+      }
+  
+      if (!req.file) {
+        return res.status(400).json({ error: "Image file is required." });
+      }
+  
+      // Upload the file to Cloudinary
+      const image = await cloudinary.uploader.upload(req.file.path);
+  
+      const newCourse = await Course.create({
+        title,
+        description,
+        images: image.secure_url,
+        price,
+        duration,
+        week: JSON.parse(week), // Parse JSON string to array
+        keypoint: JSON.parse(keypoint), // Parse JSON string to array
+        classDetails: JSON.parse(classDetails), // Parse JSON string to array of objects
+        classkey: JSON.parse(classkey),
+        content,
+        link,
       });
-      console.log("130 \n \n",image.url);
-    // Respond with Cloudinary URL or other relevant data
-
-    const newCourse = await Course.create({title,description,images:image.url,link,classDetails,price,content,classkey,week,keypoint,duration})
-    console.log('new course',newCourse)
-    res.status(201).json({msg:"Course added Successfull\n\n", res:newCourse});
+  
+      res.status(201).json({ msg: "Course added successfully", course: newCourse });
     } catch (error) {
-       console.log('Error in uploading course', error);
+      console.error("Error in uploading course:", error);
+      res.status(500).json({ error: "Failed to upload course" });
     }
-}
+  };
+
+  
 
 const Getuser = async (req,res) => {
 try{
