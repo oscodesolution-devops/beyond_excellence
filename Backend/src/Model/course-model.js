@@ -12,7 +12,7 @@ const coursesSchema = new mongoose.Schema({
   },
   images: {
     type: String, // Store image URLs
-    required: true,
+    // required: true,
   },
   price: {
     type: String,
@@ -24,31 +24,25 @@ const coursesSchema = new mongoose.Schema({
   },
   content: {
     type: String,
-    required: true,
+    // required: true,
   },
   week: {
     type: [String], // Array of strings
     required: true,
   },
   classDetails: {
-    type: [
-      {
-        className: String,
-        instructor: String,
-        schedule: String,
-      },
-    ],
+    type: [],
     required: true,
   },
   keypoint: {
-    type: [String],
+    type: [],
   },
   classkey: {
-    type: [String],
+    type: String,
   },
   link: {
     type: String,
-    required: true,
+    // required: true,
   },
   createdAt: {
     type: Date,
@@ -59,7 +53,7 @@ const coursesSchema = new mongoose.Schema({
     default: Date.now,
   },
   course: {
-    type: [String],
+    type: String,
   },
   purchaseDate: {
     type: Date,
@@ -67,10 +61,10 @@ const coursesSchema = new mongoose.Schema({
   expiryDate: {
     type: Date,
   },
-  enrolledStudents: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-  },
+  // enrolledStudents: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'user',
+  // },
 });
 
 const Course = mongoose.model('course', coursesSchema);

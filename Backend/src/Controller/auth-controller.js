@@ -115,18 +115,31 @@ const Admin = async (req,res) => {
 }
 
 const CourseUpload = async (req, res) => {
+
     try {
-      const { title, description, price, content, duration, week, keypoint, classDetails, classkey, link } = req.body;
-  
+      const { title, description, price, content, duration, week, keypoint, classDetails, classkey, link , course } = req.body;
+      
+      console.log("Request Body Data:");
+      console.log("Title:", title);
+      console.log("Description:", description);
+      console.log("Price:", price);
+      console.log("Content:", content);
+      console.log("Duration:", duration);
+      console.log("Week:", week);
+      console.log("Keypoint:", keypoint);
+      console.log("Class Details:", classDetails);
+      console.log("Class Key:", classkey);
+      console.log("Link:", link);
+      console.log("Course:", course);
+
       // Validate required fields
-      if (!title || !description || !price || !duration || !link) {
+      if (!title || !description || !price || !duration ) {
         return res.status(400).json({ error: "All required fields must be provided." });
       }
   
       if (!req.file) {
         return res.status(400).json({ error: "Image file is required." });
       }
-  
       // Upload the file to Cloudinary
       const image = await cloudinary.uploader.upload(req.file.path);
   
@@ -138,10 +151,11 @@ const CourseUpload = async (req, res) => {
         duration,
         week: JSON.parse(week), // Parse JSON string to array
         keypoint: JSON.parse(keypoint), // Parse JSON string to array
-        classDetails: JSON.parse(classDetails), // Parse JSON string to array of objects
-        classkey: JSON.parse(classkey),
+        classDetails: classDetails, // Parse JSON string to array of objects
+        classkey: classkey,
         content,
         link,
+        course
       });
   
       res.status(201).json({ msg: "Course added successfully", course: newCourse });

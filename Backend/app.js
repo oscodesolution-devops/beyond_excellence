@@ -20,12 +20,14 @@ const app = express();
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 const authMiddleware = require('./src/Middleware/authMiddleware')
+const morgan = require('morgan')
 const corsOption = {
     origin:process.env.FRONTEND_PATH,
     method:'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials:true,
 }
 app.use(cors(corsOption))
+app.use(morgan("dev"))
 app.use(express.json());
 app.use('/api-doc',swaggerUi.serve,swaggerUi.setup(swaggerJsdoc));
 

@@ -13,7 +13,7 @@ const Sidebar = () => {
 
     return (
         <div className='flex w-full'>
-            <button onClick={toggleSidebar} className="fixed  top-4 right-4 z-50 p-3 text-white bg-indigo-600 rounded-full shadow-lg focus:outline-none focus:ring focus:ring-indigo-300 lg:hidden">
+            <button onClick={toggleSidebar} className="sticky  top-0 right-4 z-50 p-3 text-white bg-indigo-600 rounded-full shadow-lg focus:outline-none focus:ring focus:ring-indigo-300 lg:hidden">
                 {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
             </button>
 
